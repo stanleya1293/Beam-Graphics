@@ -1,5 +1,5 @@
 project(Example)
-add_executable(Example main.cpp lib/glad/src/glad.c Shader.cpp Window.cpp)
+add_executable(Example main.cpp lib/glad/src/glad.c Shader.cpp Window.cpp "Camera.h" "Camera.cpp")
 add_subdirectory(./lib/glfw-3.4)
 target_link_libraries(Example PRIVATE glfw)
 include_directories(lib/glad/include)
