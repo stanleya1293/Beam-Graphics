@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+enum ShaderType { //work on this another time
+	Vertex,
+	Fragment
+};
+
 Shader::Shader(const std::string &vertexPath, const std::string &fragmentPath) :
 	m_program(NULL)
 {

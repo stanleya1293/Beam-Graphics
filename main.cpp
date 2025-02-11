@@ -8,6 +8,7 @@
 
 #include "Shader.h"
 #include "Window.h"
+#include "Camera.h"
 
 int main() {
 	
@@ -58,6 +59,8 @@ int main() {
 
     Window window("Title", 1000, 800);
 
+    Camera camera({0.0f, 0.0f, 0.0f}, window.width(), window.height());
+
     Shader shader("../../../shaders/shader.vertex", "../../../shaders/shader.fragment");
     shader.use();
 
@@ -74,11 +77,10 @@ int main() {
     glEnableVertexAttribArray(0);
 
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
     model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 
-
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float) 1000.0f / (float) 800.0f, 0.1f, 100.0f);
+    
 
     
 
@@ -86,11 +88,8 @@ int main() {
 
         shader.setMat4("model", model);
 
-        view = glm::lookAt(cameraPos, cameraFront + cameraPos, cameraUp);
-        shader.setMat4("view", view);
-
-        shader.setMat4("projection", projection);
-
+        shader.setMat4("view", camera.view());
+        shader.setMat4("projection", camera.projection());
         glDrawArrays(GL_TRIANGLES, 0, 36);
         
         window.update();

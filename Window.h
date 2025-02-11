@@ -11,8 +11,12 @@ public:
 	~Window();
 	bool isOpen() const;
 	void update() const;
+	int width() const;
+	int height() const;
 private:
 	GLFWwindow* m_windowPtr;
+	int m_width;
+	int m_height;
 };
 
 #endif
