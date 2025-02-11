@@ -12,10 +12,10 @@
 class Shader
 {
 public:
-	Shader(std::string vertexPath, std::string fragmentPath);
+	Shader(const std::string &vertexPath, const std::string &fragmentPath);
 	~Shader();
-	void use();
-	void setMat4(std::string name, glm::mat4 data);
+	void use() const;
+	void setMat4(const std::string &name, const glm::mat4 &data) const;
 private:
 	unsigned int m_program;
 };

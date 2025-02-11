@@ -7,19 +7,10 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Shader.h"
+#include "Window.h"
 
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-
-}
-
-int main()
-{
-	glfwInit();
-	GLFWwindow* window = glfwCreateWindow(1000, 800, "Example", NULL, NULL);
-	glfwMakeContextCurrent(window);
-	gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-    glViewport(0, 0, 1000, 800);
+int main() {
+	
 
     float vertices[] = {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -65,9 +56,9 @@ int main()
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
+    Window window("Title", 1000, 800);
 
     Shader shader("../../../shaders/shader.vertex", "../../../shaders/shader.fragment");
-
     shader.use();
 
     unsigned int VAO;
@@ -94,12 +85,8 @@ int main()
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
     
-    glfwSetWindowUserPointer(window, &cameraPos);
-    glfwSetKeyCallback(window, keyCallback);
 
-	while (!glfwWindowShouldClose(window))
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
+	while (window.isOpen()) {
 
         shader.setMat4("model", model);
 
@@ -109,10 +96,9 @@ int main()
         shader.setMat4("projection", projection);
 
         glDrawArrays(GL_TRIANGLES, 0, 36);
-        glfwPollEvents();
-		glfwSwapBuffers(window);
+        
+        window.update();
 	}
 
-    glfwTerminate();
 	return 0;
 }

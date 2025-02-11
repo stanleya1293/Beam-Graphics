@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Shader::Shader(std::string vertexPath, std::string fragmentPath) :
+Shader::Shader(const std::string &vertexPath, const std::string &fragmentPath) :
 	m_program(NULL)
 {
 	std::ifstream vertexFile(vertexPath);
@@ -63,12 +63,10 @@ Shader::~Shader()
 	glDeleteProgram(m_program);
 }
 
-void Shader::use()
-{
+void Shader::use() const {
 	glUseProgram(m_program);
 }
 
-void Shader::setMat4(std::string name, glm::mat4 data)
-{
+void Shader::setMat4(const std::string &name, const glm::mat4 &data) const {
 	glUniformMatrix4fv(glGetUniformLocation(m_program, name.c_str()), 1, GL_FALSE, glm::value_ptr(data));
 }
