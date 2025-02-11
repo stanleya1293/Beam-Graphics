@@ -1,5 +1,5 @@
 project(Beam)
-add_executable(Beam main.cpp lib/glad/src/glad.c Shader.cpp Window.cpp Camera.cpp)
+add_executable(Beam main.cpp lib/glad/src/glad.c Shader.cpp Window.cpp Camera.cpp  )
 add_subdirectory(./lib/glfw-3.4)
 target_link_libraries(Beam PRIVATE glfw)
 include_directories(lib/glad/include)

@@ -79,17 +79,14 @@ int main() {
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
     model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-
-    
-
     
 
 	while (window.isOpen()) {
 
         shader.setMat4("model", model);
-
         shader.setMat4("view", camera.view());
         shader.setMat4("projection", camera.projection());
+
         glDrawArrays(GL_TRIANGLES, 0, 36);
         
         window.update();

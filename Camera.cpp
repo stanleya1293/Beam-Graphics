@@ -6,7 +6,7 @@ Camera::Camera(const glm::vec3& position, int screenWidth, int screenHeight) :
 	m_position(position),
 	m_front(glm::vec3(0, 0, -1))
 {
-	m_projection = glm::perspective(glm::radians(45.0f), (float) screenHeight / (float) screenWidth, 0.1f, 100.0f);
+	m_projection = glm::perspective(glm::radians(45.0f), (float) screenWidth / (float) screenHeight, 0.1f, 100.0f);
 	m_view = glm::lookAt(m_position, m_position + m_front, glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
@@ -33,4 +33,22 @@ glm::mat4 Camera::view() const {
 
 glm::mat4 Camera::projection() const {
 	return m_projection;
+}
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	Camera* camera = static_cast<Camera*>(glfwGetWindowUserPointer(window));
+	switch (key) {
+	case GLFW_KEY_W:
+		camera->move(Forward, 0.05f);
+		break;
+	case GLFW_KEY_S:
+		camera->move(Backward, 0.05f);
+		break;
+	case GLFW_KEY_A:
+		camera->move(Left, 0.05f);
+		break;
+	case GLFW_KEY_D:
+		camera->move(Right, 0.05f);
+		break;
+	}
 }

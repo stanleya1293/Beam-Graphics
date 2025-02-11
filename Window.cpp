@@ -37,3 +37,8 @@ int Window::width() const {
 int Window::height() const {
 	return m_height;
 }
+
+void Window::setPointer(void* object) const {
+	glfwSetWindowUserPointer(m_windowPtr, object);
+}
+
