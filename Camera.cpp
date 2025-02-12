@@ -64,5 +64,6 @@ glm::mat4 Camera::projection() const {
 	return m_projection;
 }
 
-
-
+glm::vec3 Camera::position() const {
+	return m_position;
+}

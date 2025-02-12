@@ -20,6 +20,7 @@ public:
     void rotate(float xOffset, float yOffset);
     glm::mat4 view() const;
     glm::mat4 projection() const;
+    glm::vec3 position() const;
 private:
     glm::mat4 m_projection;
     glm::mat4 m_view;
