@@ -42,3 +42,6 @@ void Window::setPointer(void* object) const {
 	glfwSetWindowUserPointer(m_windowPtr, object);
 }
 
+void Window::setKeyCallback(GLFWkeyfun function) const {
+	glfwSetKeyCallback(m_windowPtr, function);
+}

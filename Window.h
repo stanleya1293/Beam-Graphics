@@ -4,11 +4,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-enum InputType {
-	Key,
-	Mouse
-};
-
 class Window {
 public:
 	Window(const std::string &title, int width, int height);
@@ -18,7 +13,7 @@ public:
 	int width() const;
 	int height() const;
 	void setPointer(void* object) const;
-	void setCallback(InputType type, ) const;
+	void setKeyCallback(GLFWkeyfun function) const;
 private:
 	GLFWwindow* m_windowPtr;
 	int m_width;

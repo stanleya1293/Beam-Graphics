@@ -36,7 +36,7 @@ glm::mat4 Camera::projection() const {
 }
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-	Camera* camera = static_cast<Camera*>(glfwGetWindowUserPointer(window));
+	Camera* camera = reinterpret_cast<Camera*>(glfwGetWindowUserPointer(window));
 	switch (key) {
 	case GLFW_KEY_W:
 		camera->move(Forward, 0.05f);
@@ -52,3 +52,5 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 		break;
 	}
 }
+
+

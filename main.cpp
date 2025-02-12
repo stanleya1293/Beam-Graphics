@@ -1,7 +1,6 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <gl/gl.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -59,9 +58,12 @@ int main() {
 
     Window window("Title", 1000, 800);
 
-    Camera camera({0.0f, 0.0f, 0.0f}, window.width(), window.height());
+    Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), window.width(), window.height());
 
-    Shader shader("../../../shaders/shader.vertex", "../../../shaders/shader.fragment");
+    window.setPointer(&camera);
+    window.setKeyCallback(keyCallback);
+
+    Shader shader("../shaders/shader.vertex", "../shaders/shader.fragment");
     shader.use();
 
     unsigned int VAO;
