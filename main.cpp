@@ -58,12 +58,11 @@ int main() {
 
     Window window("Title", 1000, 800);
 
-    Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), window.width(), window.height());
+    Camera camera({ 0.0f, 0.0f, 0.0f }, window.width(), window.height());
 
     window.setPointer(&camera);
-    window.setKeyCallback(keyCallback);
 
-    Shader shader("../shaders/shader.vertex", "../shaders/shader.fragment");
+    Shader shader("../../../shaders/shader.vertex", "../../../shaders/shader.fragment");
     shader.use();
 
     unsigned int VAO;

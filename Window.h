@@ -3,6 +3,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Camera.h"
 
 class Window {
 public:
@@ -13,11 +14,14 @@ public:
 	int width() const;
 	int height() const;
 	void setPointer(void* object) const;
-	void setKeyCallback(GLFWkeyfun function) const;
+private:
+	void processKeyInputs() const;
 private:
 	GLFWwindow* m_windowPtr;
 	int m_width;
 	int m_height;
 };
+
+void mouseCallback(GLFWwindow* window, double xPos, double yPos);
 
 #endif
