@@ -16,6 +16,7 @@ public:
 	~Shader();
 	void use() const;
 	void setMat4(const std::string &name, const glm::mat4 &data) const;
+	void setVec3(const std::string &name, const glm::vec3 &data) const;
 private:
 	unsigned int m_program;
 };
