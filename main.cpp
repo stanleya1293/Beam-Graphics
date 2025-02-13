@@ -17,11 +17,11 @@ int main() {
     
     Window window("Title", 1000, 800);
 
-    Camera camera({ 0.0f, 0.0f, 0.0f }, window.width(), window.height());
+    Camera camera({ 0.0f, 0.0f, 3.0f }, window.width(), window.height());
 
     window.setPointer(&camera);
 
-    Shader shader("../../../shader.vertex", "../../../shader.fragment");
+    Shader shader("../../../shaders/shader.vertex", "../../../shaders/shader.fragment");
     
     Model ourModel("../../../assets/backpack.obj");
 

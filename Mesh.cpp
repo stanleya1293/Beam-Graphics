@@ -32,6 +32,8 @@ Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> 
 void Mesh::draw(const Shader& shader) const {
 	unsigned int diffuseNum = 1;
 	unsigned int specularNum = 1;
+	unsigned int normalNum = 1;
+	unsigned int heightNum = 1;
 	for (unsigned int i = 0; i < m_textures.size(); i++) {
 		glActiveTexture(GL_TEXTURE0 + i);
 		std::string number;
@@ -42,14 +44,21 @@ void Mesh::draw(const Shader& shader) const {
 		else if (name == "texture_specular") {
 			number = std::to_string(specularNum++);
 		}
+		else if (name == "texture_normal") {
+			number = std::to_string(normalNum++);
+		}
+		else if (name == "texture_height") {
+			number = std::to_string(heightNum++);
+		}
 
-		shader.setInt(("material." + name + number).c_str(), i);
+		shader.setInt((name + number).c_str(), i);
 		glBindTexture(GL_TEXTURE_2D, m_textures[i].id);
 	}
-	glActiveTexture(GL_TEXTURE0);
 
 	shader.use();
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+
+	glActiveTexture(GL_TEXTURE0);
 }
