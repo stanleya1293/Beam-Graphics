@@ -4,7 +4,7 @@
 
 Model::Model(std::string path) {
 	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
 	
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
@@ -57,7 +57,8 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 			vec.y = mesh->mTextureCoords[0][i].y;
 			vertex.TexCoords = vec;
 		}
-		else vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+		else 
+			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
 		vertices.push_back(vertex);
 	}
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
@@ -99,7 +100,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType 
 		if (!skip)
 		{
 			Texture texture;
-			texture.id = TextureFromFile(str.C_Str(), m_directory);
+			texture.id = TextureFromFile(str.C_Str(), this->m_directory);
 			texture.type = typeName;
 			texture.path = str.C_Str();
 			textures.push_back(texture);
@@ -111,6 +112,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType 
 
 unsigned int TextureFromFile(const char* path, const std::string& directory)
 {
+	stbi_set_flip_vertically_on_load(true);
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;
 

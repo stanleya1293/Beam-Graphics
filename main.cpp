@@ -23,7 +23,7 @@ int main() {
 
     Shader shader("../../../shaders/shader.vertex", "../../../shaders/shader.fragment");
     
-    Model ourModel("../../../assets/backpack.obj");
+    Model ourModel("../../../assets/backpack/backpack.obj");
 
 	while (window.isOpen()) {
         shader.use();

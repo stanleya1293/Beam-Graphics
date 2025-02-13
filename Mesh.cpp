@@ -39,16 +39,16 @@ void Mesh::draw(const Shader& shader) const {
 		std::string number;
 		std::string name = m_textures[i].type;
 		if (name == "texture_diffuse") {
-			number = std::to_string(diffuseNum++);
+			number = std::to_string(diffuseNum);
 		}
 		else if (name == "texture_specular") {
-			number = std::to_string(specularNum++);
+			number = std::to_string(specularNum);
 		}
 		else if (name == "texture_normal") {
-			number = std::to_string(normalNum++);
+			number = std::to_string(normalNum);
 		}
 		else if (name == "texture_height") {
-			number = std::to_string(heightNum++);
+			number = std::to_string(heightNum);
 		}
 
 		shader.setInt((name + number).c_str(), i);
@@ -57,7 +57,7 @@ void Mesh::draw(const Shader& shader) const {
 
 	shader.use();
 	glBindVertexArray(m_VAO);
-	glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(m_indices.size()), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
 	glActiveTexture(GL_TEXTURE0);
